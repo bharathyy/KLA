@@ -1,2 +1,1 @@
-import cv
-print(dir(cv))
+print("huuu")
