@@ -113,7 +113,7 @@ def anamoly(filename):
         print("i ",j,"j ",i)
 
 
-        
+
 import numpy as np
 list1=[1,2,3,4,2222,2,2,2,]
 np.array(list1)
@@ -121,3 +121,21 @@ x=np.unique(list1)
 print(x)
 
 #By finding mean Image Pixel Intensity
+
+
+print(len(y1))
+print(len(y2))
+print(y1[0])
+common=[]
+
+for i in range(0,4975):
+  for j in range(0,4974):
+    if y1[i]==y2[j]:
+      #print("no Defect Area")
+      common.append(y1[i])
+
+    else:
+      pass
+      
+print(common)
+
