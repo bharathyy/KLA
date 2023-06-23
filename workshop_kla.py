@@ -94,18 +94,26 @@ img = cv2.imread("wafer_image_1.png")
 
 #print(prev)
 
-for i in range(0,600):
-  for j in range(0,800):
-    x=img[i][j]
-    if x[0]==255:
-      pass
-    elif x[0]==128:
-      pass
-    else:
+def anamoly(filename):
+  img = cv2.imread(str(filename))
+#print(img.shape)
 
-      print("Defect Found")
-      print("i ",j,"j ",i)
+#print(prev)
 
+  for i in range(0,600):
+    for j in range(0,800):
+      x=img[i][j]
+      if x[0]==255:
+        pass
+      elif x[0]==128:
+        pass
+      else:
+
+        print("Defect Found")
+        print("i ",j,"j ",i)
+
+
+        
 import numpy as np
 list1=[1,2,3,4,2222,2,2,2,]
 np.array(list1)
