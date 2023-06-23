@@ -10,6 +10,9 @@ Original file is located at
 import cv2
 from PIL import Image, ImageStat
 from google.colab import files
+import numpy as np
+import csv
+import json
 
 file=files.upload()
 
@@ -89,53 +92,64 @@ finding("wafer_image_3.png")
 finding("wafer_image_4.png")
 finding("wafer_image_5.png")
 
-img = cv2.imread("wafer_image_1.png")
+def anamoly(filename1,filename2):
+  #,filename3,filename4,filename5
+
+
+    img1 = cv2.imread(str(filename1))
+    img2 = cv2.imread(str(filename2))
+
+    for i in range(0,30):
+      for j in range(0,30):
+        x1=img1[i][j]
+        y1=(x1[0]+x1[1]+x1[2])/3
+        x2=img2[i][j]
+        y2=(x2[0]+x2[1]+x2[2])/3
+
+        mean_=y1+y2/2
+        if  y1>mean_:
+          print(i,j)
+          result=[1,i,j]
+          return result
+
+        elif y2> mean_:
+          print(i,j)
+          result=[2,i,j]
+          return result
+
+        else:
+          print(" ")
+
+img = cv2.imread("wafer_image_5.png")
 #print(img.shape)
 
 #print(prev)
+we=[]
+for i in range(0,600):
+  for j in range(0,800):
 
-def anamoly(filename):
-  img = cv2.imread(str(filename))
-#print(img.shape)
-
-#print(prev)
-
-  for i in range(0,600):
-    for j in range(0,800):
-      x=img[i][j]
-      if x[0]==255:
-        pass
-      elif x[0]==128:
-        pass
-      else:
-
-        print("Defect Found")
-        print("i ",j,"j ",i)
-
-
-
-import numpy as np
-list1=[1,2,3,4,2222,2,2,2,]
-np.array(list1)
-x=np.unique(list1)
-print(x)
-
-#By finding mean Image Pixel Intensity
-
-
-print(len(y1))
-print(len(y2))
-print(y1[0])
-common=[]
-
-for i in range(0,4975):
-  for j in range(0,4974):
-    if y1[i]==y2[j]:
-      #print("no Defect Area")
-      common.append(y1[i])
-
-    else:
+    x=img[i][j]
+    if x[0]==255:
       pass
-      
-print(common)
+    elif x[0]==128:
+      pass
+    else:
+      result=[]
+      #print("i ",j,"j ",i)
+      result.append(5)
+      result.append(j)
+      result.append(599-i)
+      we.append(result)
+      print(result)
+
+
+with open('output.csv', 'a') as file:
+  writer = csv.writer(file)
+  writer.writerows(we)
+
+  
+
+import pandas as pd
+data=pd.read_csv('output.csv',header=None,index_col=None)
+print(data)
 
